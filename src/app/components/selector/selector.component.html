@@ -1,0 +1,10 @@
+<p>selector works!</p>
+
+<!-- Angular Structural directive -->
+
+<select [ngStyle]="{padding: '5px', marginBottom: '10px', width:'50vw'}" (change)="select($event)">
+
+    <option *ngFor="let item of dataSource" [value]="item.displayValue" 
+    [ngClass]="item.displayValue == selectedValue || item.selected ? 'active-item': ''">{{item.displayText}}</option>
+
+</select>

@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'AngularFoundementals';
+  // property binding
+  title = 'AngularFoundementals'; // default olarak public olarak tanımlanır ve html tarafında kullanılabilir.
+
+
+  // event binding
+  click() {
+    this.title = "Angular"; // this ile class içindeki değişkenlere erişebiliriz.
+  }
+
+
 }

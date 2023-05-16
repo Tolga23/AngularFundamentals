@@ -1,0 +1,30 @@
+<h1>Home Page</h1>
+
+<!-- hidden attribute angularda display style değiştiren bir directivedir -->
+<p [hidden]="visible">İçerik</p>
+
+<!-- Dynamic Binding -->
+<app-block-button [color]="btnColor" text="Göster/Gizle" (onClick)="showHide()" ></app-block-button>
+<!-- Static Binding -->
+<app-block-button color="blue" text="Button1" (onClick)="btnClick()" ></app-block-button>
+<!--color, text input, onClick output-->
+
+<app-selector [dataSource]="cityMaps" (onSelect)="onCitySelect($event)"></app-selector>
+
+<!-- İlgili templateyi DOM'a basmadığımız sürece angularda template içindeki kodlar görünmez. Modal popup gibi yapılar için genelde tercih edilir -->
+<ng-template #ankara>
+    Ankara Başkent
+</ng-template>
+<ng-template #istanbul>
+    İstanbul Boğaz
+</ng-template>
+
+<div *ngIf="selectedCity == '34'; then istanbul else ankara"></div>
+
+<!-- ngSwitch case ve *ngIf structural directive -->
+<div [ngSwitch]="selectedCity">
+    <p *ngSwitchCase="34">İstanbul</p>
+    <p *ngSwitchCase="06">Ankara</p>
+    <p *ngSwitchCase="26">Eskisehir</p>
+    <p *ngSwitchDefault>Seçim Yapılmadı</p>
+</div>
