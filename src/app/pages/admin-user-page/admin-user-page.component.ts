@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map, of } from 'rxjs';
+
 
 // DTO'dan gelen verileri tutmak için interface oluşturuyoruz.
 export interface User {
@@ -35,7 +38,7 @@ export class AdminUserPageComponent implements OnInit {
     }
   ];
 
-  
+  constructor(private httpClient: HttpClient) { }
 
   async ngOnInit() {
     // this.users.map((user) => {
@@ -49,6 +52,67 @@ export class AdminUserPageComponent implements OnInit {
     // this.fetchSample();
     // this.asyncAwaitfetchUsers();
 
+    this.loadDataWithHttpClient();
+
+  }
+
+
+
+  loadDataWithHttpClient() {
+    const obb: Observable<number[]> = of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    obb.subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+    });
+
+    const obb2 = new Observable((observer) => {
+     // observer.error('error'); // reject
+      observer.next([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]); // resolve
+    });
+
+    // pipe ile veriler manipüle edilebilir.
+    obb2.pipe( map((data:any) => {
+      return data.map((item:any) => {
+        return item * 2;
+      });
+    })).subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log('complete');
+      }
+    });
+
+    var subs = obb2.subscribe({ next: () => { }, error(err) {}, complete() {} });
+    subs.unsubscribe(); // kaynak tüketimini önlemek için kullanılır.
+
+    // Observable ile Promise farkı
+    // Promise tanımlandığında kaynak tüketmeye başlar. Observable tanımlandığında çalışmaya başlamaz. Subscribe ile çalıştırılır.
+    // İş bitince Promise kaynak tüketimini sonlandırır. Observable ise unsubscribe ile kaynak tüketimini sonlandırır.
+    // Observable'da veri takibi yapılabilir. Amaç veri değiştiğinde anlık olarak veriyi yakalamak. 
+
+    this.httpClient.get('https://jsonplaceholder.typicode.com/users', {
+      headers: {
+        Authorization: 'Bearer token',
+        ContentType: 'application/json',
+    },
+    }).subscribe({
+      next:(response:any) => {
+      console.log(response);
+      this.users = response;
+      },
+      error:(error) => {
+        console.log(error);
+      },
+      complete:() => {
+        console.log('complete');
+      }
+    });
 
   }
 

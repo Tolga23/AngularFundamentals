@@ -15,6 +15,8 @@ import { AdminRolePageComponent } from './pages/admin-role-page/admin-role-page.
 import { UserCardPageComponent } from './pages/user-card-page/user-card-page.component';
 import { TableModule } from 'primeng/table';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     ButtonModule,
     UniModule,
     LayoutModule,
-    TableModule
+    TableModule,
+    HttpClientModule // HttpClient için gerekli 
   ],
   providers: [], // services are provided here
   bootstrap: [AppComponent]
