@@ -34,13 +34,129 @@ export class AdminUserPageComponent implements OnInit {
       username: "tinchystryder",
     }
   ];
+
   
-  ngOnInit(): void {
-    this.users.map((user) => {
-      user.name = user.name?.toUpperCase();
-      user.surname = user.surname?.toUpperCase();
-      user.email = user.username + "@gmail.com";
+
+  async ngOnInit() {
+    // this.users.map((user) => {
+    //   user.name = user.name?.toUpperCase();
+    //   user.surname = user.surname?.toUpperCase();
+    //   user.email = user.username + "@gmail.com";
+    // }
+    // );
+
+    //this.promiseSample();
+    // this.fetchSample();
+    // this.asyncAwaitfetchUsers();
+
+
+  }
+
+  private fetchSample() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((response: Response) => {
+        console.log(response);
+
+        if (response.status === 401) {
+          return Promise.reject({ message: 'You need to login' });
+        }
+
+        if (!response.ok) {
+          return Promise.reject({ message: 'Page cant find' }); // response içerisindeki hata mesajını yakalayıp reject eder.        
+        }
+
+        return response.json(); // response içerisindeki verileri json formatına çevirir.
+      }).then((data: any) => {
+        console.log(data); // json formatına çevrilen veriler
+        this.users = data; // data olarak api'den gelen verileri users değişkenine atıyoruz.
+      }).catch((error) => {
+        console.log('Error: ', error.message);
+      });
+  }
+
+  async asyncAwaitfetchUsers() {
+    // ES7 async await ile promise yapısının kullanımı
+    try {
+      // bu sayede Promise chain yapısında olduğu gibi then ve catch kullanmamıza gerek kalmaz.
+      const response = await fetch('https://jsonplaceholder.typicode.com/users');
+      const data = await response.json();
+      console.log(data);
+
+      const postResponse = await fetch('https://jsonplaceholder.typicode.com/posts');
+      const postData = await postResponse.json();
+      console.log(postData);
+
+      if(postData.status == 404) {
+        Promise.reject({ message: 'Page cant find' });
+      }
+
+    } catch (error) {
+      console.log('Error: ', error);
+    } finally {
+      console.log('Finally');
+    }
+  }
+
+
+  promiseSample() {
+    // promise verinin t zamanda geldiği durumlar için kullanılılan async yapıdır.
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve([{ id: 1, name: 'Tolga' }]); // sonuç başarılı ise resolve ile döndürülür.
+      }, 1000);
+    });
+
+    // promise çağrılma kısmı
+    promise.then((data: any) => {
+      console.log(data); // resolve içerisindeki değer
+    }).catch((error) => {
+      console.log(error); // verilerin reject edilmesi durumunda
+    }).finally(() => {
+      console.log('Finally');
+    });
+
+    let counter = 0;
+
+    const timer = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        counter++;
+        resolve("Counter " + counter);
+      }, 1000);
     }
     );
-  } 
+
+    timer.then((data: any) => {
+      console.log(data);
+    });
+
+    const promiseWrapper = new Promise((resolve, reject) => {
+
+      const response: any = [];
+
+      // promise chain yapısı ile işlemlerin sıralı olarak çağrılması sağlanır.
+      promise.then((data: any) => {
+        console.log('promise data', data);
+        response.push(data);
+        return timer;
+      }).then((timerData: any) => {
+        console.log('timerData ', timerData);
+        response.push(timerData);
+        resolve(response);
+      }).then(() => {
+        console.log('response', response);
+      });
+
+    });
+
+    promiseWrapper.then((data: any) => {
+      console.log('promiseWrapper', data);
+    });
+
+    // Promise all ile birden fazla promise aynı anda tek seferde çağrılabilir. Sonuçlar bir dizi içerisinde döndürülür.
+    // Promise chain ile benzer mantıkta çalışır.
+    Promise.all([promise, timer]).then((response) => {
+      console.log(response);
+    });
+  }
+
 }

@@ -4,7 +4,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Surname</th>
+            <th>Email</th>
             <th>Username</th>
             <th>Details</th>
 
@@ -14,7 +14,7 @@
         <tr>
             <td>{{ user.id }}</td>
             <td>{{ user.name | titlecase }}</td>
-            <td>{{ user.surname | uppercase }}</td>
+            <td>{{ user.email | titlecase }}</td>
             <td>{{ user.username }}</td>
             <td> <a  [routerLink]="['/admin/user-card',user.id,user.username]" 
                 routerLinkActive="router-link-active" >

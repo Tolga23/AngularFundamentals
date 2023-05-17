@@ -14,7 +14,7 @@ export class AdminLayoutComponent implements OnInit {
     this.items = [ {
       label: 'HomePage',
       icon: 'pi pi-fw pi-home',
-      routerLink: '',
+      routerLink: '/',
     },
       {
         label: 'Users',
