@@ -8,6 +8,13 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { ButtonModule } from 'primeng/button';
 import { UniModule } from './components/uni.module';
+import { LayoutModule } from './layout/layout.module';
+import { AdminHomePageComponent } from './pages/admin-home-page/admin-home-page.component';
+import { AdminUserPageComponent } from './pages/admin-user-page/admin-user-page.component';
+import { AdminRolePageComponent } from './pages/admin-role-page/admin-role-page.component';
+import { UserCardPageComponent } from './pages/user-card-page/user-card-page.component';
+import { TableModule } from 'primeng/table';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 
 @NgModule({
@@ -16,12 +23,19 @@ import { UniModule } from './components/uni.module';
     HomePageComponent,
     ContactPageComponent,
     AboutPageComponent,
+    AdminHomePageComponent,
+    AdminUserPageComponent,
+    AdminRolePageComponent,
+    UserCardPageComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ButtonModule,
-    UniModule
+    UniModule,
+    LayoutModule,
+    TableModule
   ],
   providers: [], // services are provided here
   bootstrap: [AppComponent]

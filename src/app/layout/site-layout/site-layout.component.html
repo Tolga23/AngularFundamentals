@@ -1,0 +1,12 @@
+<div class="flex flex-column">
+    <p-menubar styleClass="bg-dark text-white" 
+               [model]="items"></p-menubar>
+    <main>
+        <!-- Dinamik içerik kısmı -->
+        <router-outlet></router-outlet>
+    </main>
+
+    <footer class="flex flex-row bottom-0 fixed h-3rem text-blue-600 bg-bluegray-300 w-full p-3  left-0" >
+        Footer
+    </footer>
+</div>
