@@ -11,6 +11,7 @@ import { AdminRolePageComponent } from './pages/admin-role-page/admin-role-page.
 import { UserCardPageComponent } from './pages/user-card-page/user-card-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { AdminPanelGuard } from './guard/admin-panel.guard';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
   {
     path: "admin",
     component: AdminLayoutComponent,
+    canActivate: [AdminPanelGuard], // admin paneli guard ile korunuyor. 
     children: [
       { path: "", component: AdminHomePageComponent, data: { title: "Admin Home Page" }},
       { path: "users", component: AdminUserPageComponent, data: { title: "Admin User Page" } },

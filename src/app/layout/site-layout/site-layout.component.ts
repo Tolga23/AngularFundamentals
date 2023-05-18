@@ -10,7 +10,7 @@ export class SiteLayoutComponent implements OnInit {
   items!: MenuItem[];
 
   
-  // component ilk çalıştığında yapılan işlemler, genelde apiden 
+  // component ilk çalıştığında yapılan işlemler, genelde apiden veri çekme işlemleri burada yapılır.
   ngOnInit(): void {
     let user!: any;
     if(localStorage.getItem('userInfo') != null) {
@@ -18,8 +18,16 @@ export class SiteLayoutComponent implements OnInit {
     }
 
     this.items = [ {
-      label: user?.name || 'Guest',
+      label: user?.name || 'Oturum Aç',
       icon: 'pi pi-fw pi-user',
+      command: () => {
+        if(user) {
+          console.log('user: ', user);
+        }
+        else {
+          window.location.href = '/login';
+        }        
+      }
     },
       {
         label: 'Home',
@@ -62,7 +70,18 @@ export class SiteLayoutComponent implements OnInit {
         label: 'Login',
         routerLink: '/login',
         icon: 'pi pi-fw pi-sign-in',
-      }
+      },
+      {
+        label: 'Logout',
+        command: () => {
+         const result = confirm('Are you sure?');
+          if(result) {
+            localStorage.clear();
+            window.location.reload();
+          }
+        },
+        icon: 'pi pi-fw pi-sign-out',
+      },
     ];
   }
  
