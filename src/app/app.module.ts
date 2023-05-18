@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,9 +23,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { registerLocaleData } from '@angular/common';
+import localeTr from '@angular/common/locales/tr';
+import localeFr from '@angular/common/locales/fr';
+import { HttpProtocolPipe } from './pipes/http-protocol.pipe';
 
 
-
+registerLocaleData(localeTr, 'tr');
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -39,6 +44,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     UserCardPageComponent,
     NotFoundPageComponent,
     LoginPageComponent,
+    HttpProtocolPipe,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +66,10 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
       provide: HTTP_INTERCEPTORS, // interceptor'ı kullanabilmek için gerekli
       useClass: TokenInterceptor,
       multi: true 
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'tr'
     }
   ], // services are provided here
   bootstrap: [AppComponent]

@@ -67,6 +67,11 @@ export class SiteLayoutComponent implements OnInit {
         icon: 'pi pi-fw pi-chart-line',
       },
       {
+        label: 'Pipes',
+        routerLink: '/pipes',
+        icon: 'pi pi-fw pi-filter',
+      },
+      {
         label: 'Login',
         routerLink: '/login',
         icon: 'pi pi-fw pi-sign-in',

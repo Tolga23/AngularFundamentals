@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, of, take } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import { ProtocolType } from 'src/app/pipes/http-protocol.pipe';
 
 
 // DTO'dan gelen verileri tutmak için interface oluşturuyoruz.
@@ -11,6 +12,7 @@ export interface User {
   surname?: string;
   username: string;
   email?: string;
+  website?: string;
 }
 
 @Component({
@@ -38,6 +40,11 @@ export class AdminUserPageComponent implements OnInit {
       username: "tinchystryder",
     }
   ];
+
+  // enum tiplerine erişmek için getter kullanılır.
+  public get ProtocolType() {
+    return ProtocolType;
+  }
 
   constructor(
     private httpClient: HttpClient,
