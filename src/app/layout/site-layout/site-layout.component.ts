@@ -44,10 +44,14 @@ export class SiteLayoutComponent implements OnInit {
         label: 'Admin',
         routerLink: '/admin',
         icon: 'pi pi-fw pi-user',
+      },{
+        label: 'Reactive Programming',
+        routerLink: '/rxjs',
+        icon: 'pi pi-fw pi-chart-line',
       }
     ];
   }
-
+ 
 
 
 }

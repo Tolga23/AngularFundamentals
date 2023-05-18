@@ -1,4 +1,12 @@
-<div>
+<!-- Konsolda hata vermesine karşılık her iki yöntemden biri kullanılabilir -->
+<div *ngIf="user">
     <label> User ID: {{user.id}} </label>
     <label > Username: {{user.username}} </label>
+</div>
+    
+<br>
+
+<div>
+    <label> User ID: {{user?.id}} </label>
+    <label > Username: {{user?.username}} </label>
 </div>

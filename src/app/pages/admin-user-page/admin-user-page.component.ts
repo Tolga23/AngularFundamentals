@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, of } from 'rxjs';
+import { Observable, map, of, take } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 
 // DTO'dan gelen verileri tutmak için interface oluşturuyoruz.
@@ -38,7 +39,9 @@ export class AdminUserPageComponent implements OnInit {
     }
   ];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private userService: UserService) { }
 
   async ngOnInit() {
     // this.users.map((user) => {
@@ -51,8 +54,13 @@ export class AdminUserPageComponent implements OnInit {
     //this.promiseSample();
     // this.fetchSample();
     // this.asyncAwaitfetchUsers();
-
-    this.loadDataWithHttpClient();
+    //this.loadDataWithHttpClient();
+    this.userService.getUsers().subscribe({
+      next: (data: User[]) => {
+        this.users = data;
+        console.log(data);
+    }
+    });
 
   }
 
@@ -71,8 +79,8 @@ export class AdminUserPageComponent implements OnInit {
       observer.next([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]); // resolve
     });
 
-    // pipe ile veriler manipüle edilebilir.
-    obb2.pipe( map((data:any) => {
+    // pipe ile veriler man
+    obb2.pipe(take(1), map((data:any) => {
       return data.map((item:any) => {
         return item * 2;
       });
@@ -101,7 +109,9 @@ export class AdminUserPageComponent implements OnInit {
         Authorization: 'Bearer token',
         ContentType: 'application/json',
     },
-    }).subscribe({
+    })
+    .pipe(take(1)) // take() ile unsubscribe işlemi yapılır. 
+    .subscribe({
       next:(response:any) => {
       console.log(response);
       this.users = response;
