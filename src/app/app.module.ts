@@ -15,13 +15,14 @@ import { AdminRolePageComponent } from './pages/admin-role-page/admin-role-page.
 import { UserCardPageComponent } from './pages/user-card-page/user-card-page.component';
 import { TableModule } from 'primeng/table';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 
@@ -54,7 +55,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     
   ],
-  providers: [], // services are provided here
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, // interceptor'ı kullanabilmek için gerekli
+      useClass: TokenInterceptor,
+      multi: true 
+    }
+  ], // services are provided here
   bootstrap: [AppComponent]
 })
 export class AppModule { }

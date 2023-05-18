@@ -105,10 +105,11 @@ export class AdminUserPageComponent implements OnInit {
     // Observable'da veri takibi yapılabilir. Amaç veri değiştiğinde anlık olarak veriyi yakalamak. 
 
     this.httpClient.get('https://jsonplaceholder.typicode.com/users', {
-      headers: {
-        Authorization: 'Bearer token',
-        ContentType: 'application/json',
-    },
+    // interceptor ile header içerisine token bilgisi eklendiği için burada kullanmaya gerek kalmadı.  
+       //headers: {                         
+       // Authorization: 'Bearer token',
+       // ContentType: 'application/json',
+       // },
     })
     .pipe(take(1)) // take() ile unsubscribe işlemi yapılır. 
     .subscribe({
