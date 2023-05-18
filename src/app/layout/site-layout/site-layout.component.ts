@@ -48,6 +48,11 @@ export class SiteLayoutComponent implements OnInit {
         label: 'Reactive Programming',
         routerLink: '/rxjs',
         icon: 'pi pi-fw pi-chart-line',
+      },
+      {
+        label: 'Login',
+        routerLink: '/login',
+        icon: 'pi pi-fw pi-sign-in',
       }
     ];
   }

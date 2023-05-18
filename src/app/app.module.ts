@@ -16,6 +16,13 @@ import { UserCardPageComponent } from './pages/user-card-page/user-card-page.com
 import { TableModule } from 'primeng/table';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { PanelModule } from 'primeng/panel';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
@@ -30,6 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     AdminRolePageComponent,
     UserCardPageComponent,
     NotFoundPageComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,13 @@ import { HttpClientModule } from '@angular/common/http';
     UniModule,
     LayoutModule,
     TableModule,
-    HttpClientModule // HttpClient için gerekli 
+    HttpClientModule, // HttpClient için gerekli 
+    ReactiveFormsModule, // Reactive Forms için gerekli
+    PanelModule,
+    InputTextModule,
+    PasswordModule,
+    BrowserAnimationsModule,
+    
   ],
   providers: [], // services are provided here
   bootstrap: [AppComponent]
