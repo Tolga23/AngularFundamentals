@@ -25,7 +25,7 @@ export class LoginPageComponent {
     const param = this.loginForm.value as LoginModel;
     this.loginService.login(param).subscribe({
       error: (err) => {
-        console.log("LoginPageComponent.submit() err: ", err);
+        console.log("LoginPageComponent.submit() err: ", err.message);
       }
     }); // next ile dataya ihtiyaç yok login başarılı olursa yönlendirme servis tarafında yapılacak. localstorage'a token kaydedilecek.
   }

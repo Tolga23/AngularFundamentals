@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { retry, take, tap } from 'rxjs';
+import { catchError, retry, take, tap } from 'rxjs';
+import jwt_decode from 'jwt-decode';
 
 export interface LoginModel {
   email: string;
@@ -20,8 +21,34 @@ export class LoginService {
     .post<LoginModel>("https://reqres.in/api/login", model)
     .pipe(
       take(1),
-      tap((result) => {
+      tap((result:any) => {
         console.log("LoginService.login() result: ", result);
+
+        if(result.token != undefined) {
+          const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqaG9uQHRlc3QuY29tIiwicm9sZXMiOlsiYWRtaW4iLCJtYW5hZ2VyIl0sInBlcm1pc3Npb25zIjpbInVzZXItY3JlYXRlIiwidXNlci1kZWxldGUiXSwiaWF0IjoxNTE2MjM5MDIyfQ.mCAZjEWLkxxiuALM0UyjP4zfihoeTRqk4G1Jnqqrje4";
+          localStorage.setItem('accessToken', token );
+
+          var decoded: any = jwt_decode(token);
+          localStorage.setItem('userInfo', JSON.stringify(decoded));
+        }
+
+        window.location.href = "/";
+      }),
+      catchError((err) => {
+
+        if(err.status === 400) {
+          const errorObject = {
+            message: 'Username ve ya paralola hatalıdır.',
+          };
+        }
+
+        if(err.status === 404) {
+          const errorObject = {
+            message: 'Kullanıcı bulunamadı.',
+          };
+        }
+
+        return Promise.resolve(err);
       }),
       retry(3)
     );

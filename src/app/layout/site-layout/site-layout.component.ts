@@ -9,9 +9,18 @@ import { MenuItem } from 'primeng/api';
 export class SiteLayoutComponent implements OnInit {
   items!: MenuItem[];
 
+  
   // component ilk çalıştığında yapılan işlemler, genelde apiden 
   ngOnInit(): void {
-    this.items = [
+    let user!: any;
+    if(localStorage.getItem('userInfo') != null) {
+      user = JSON.parse(localStorage.getItem('userInfo') as any );
+    }
+
+    this.items = [ {
+      label: user?.name || 'Guest',
+      icon: 'pi pi-fw pi-user',
+    },
       {
         label: 'Home',
         routerLink: '/',
