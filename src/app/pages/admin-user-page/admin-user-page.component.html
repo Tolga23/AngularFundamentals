@@ -17,8 +17,8 @@
             <td>{{ user.name | titlecase }}</td>
             <td>{{ user.email | titlecase }}</td>
             <td>{{ user.username }}</td>
-            <td>{{ user.website | httpProtocol:ProtocolType.https }}</td>
-            <td> <a  [routerLink]="['/admin/user-card',user.id,user.username]" 
+            <td link>{{ user.website | httpProtocol:ProtocolType.https }}</td>
+            <td> <a link [routerLink]="['/admin/user-card',user.id,user.username]" 
                 routerLinkActive="router-link-active" >
                 Details
             </a>

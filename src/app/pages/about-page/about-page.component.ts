@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { CounterStateService } from 'src/app/rxjsSubjects/counter-state.service';
 
 @Component({
   templateUrl: './about-page.component.html',
@@ -13,7 +14,8 @@ export class AboutPageComponent implements OnInit, OnDestroy {
   constructor(
     private routerService: ActivatedRoute,
     private titleService: Title,
-    private metaService: Meta) {
+    private metaService: Meta,
+    public counterState: CounterStateService) {
     console.log("AboutPageComponent constructor çalıştı");
 
     console.log("routerService" + this.routerService);

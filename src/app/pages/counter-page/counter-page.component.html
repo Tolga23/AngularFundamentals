@@ -1,0 +1,27 @@
+<p>counter-page works!</p>
+
+<a pButton routerLink="/about"> About Page </a>
+
+<p-panel>
+    <ng-template pTemplate="header">
+        Sayac State Management
+    </ng-template>
+    <main>  
+        Sayac: {{ counter }}
+        
+        <input pInputText (change)="onModalChange($any($event.target).value)" [ngModel]="counter">
+        <br>
+        <input [(ngModel)]="msg" pInputText> Message
+        <input [(ngModel)]="isActive" type="checkbox"> IsActive
+
+        <p *ngIf="isActive" >
+            {{ msg }}
+        </p>
+    </main>
+
+    <ng-template pTemplate="footer">
+        <button pButton (click)="onIncrement()"> (+) </button>
+        <button pButton (click)="onDecrement()"> (-) </button>
+    </ng-template>
+
+</p-panel>

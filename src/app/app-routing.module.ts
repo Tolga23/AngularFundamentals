@@ -12,6 +12,7 @@ import { UserCardPageComponent } from './pages/user-card-page/user-card-page.com
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AdminPanelGuard } from './guard/admin-panel.guard';
+import { CounterPageComponent } from './pages/counter-page/counter-page.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
     ]
   },
   { path: "login", component: LoginPageComponent },
+  { path: "counter", component: CounterPageComponent },
   { path: "**", component: NotFoundPageComponent }
 ];
 

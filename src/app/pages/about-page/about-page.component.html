@@ -1,6 +1,7 @@
 <p>about-page works!</p>
 
+<a pButton routerLink="/counter"> Counter </a>
 
 <div class="card flex justify-content-center">
-    <p-button label="Check" icon="pi pi-check"></p-button>
+    <p-button label="{{counterState.counterSubject | async }}" icon="pi pi-check">  </p-button>
 </div>

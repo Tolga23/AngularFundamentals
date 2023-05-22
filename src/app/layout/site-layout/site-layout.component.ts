@@ -87,6 +87,11 @@ export class SiteLayoutComponent implements OnInit {
         },
         icon: 'pi pi-fw pi-sign-out',
       },
+      {
+        label: 'Counter',
+        routerLink: '/counter',
+        icon: 'pi pi-fw pi-plus',
+      }
     ];
   }
  
